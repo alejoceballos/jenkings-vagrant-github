@@ -87,6 +87,13 @@ This will take a while. Be sure you have a good internet connection. If you wann
 6. Install Jenkins (new sources and apt-get);
 7. Install Jenkins plugins (wget).
 
+### Jenkins Plugins
+
+1. TBD
+2. TBD
+3. build-pipeline-plugin
+
+
 ## Access your Jenkins server
 
 After provisioning is done, Jenkins server should be up and running. Open your favorite browser and type the URL:
