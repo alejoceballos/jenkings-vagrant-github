@@ -30,36 +30,44 @@ I shouldn't have to say that there will be a lot of downloads going on (speciall
 
 I have used the VirtualBox + Vagrant combination to create a guest machine running my Jenkins server on port 8081.
 
-#### Useful links:
-
-+ https://www.virtualbox.org/
-+ https://www.vagrantup.com/
-
 ## Steps:
 
 #### 1) Install Virtualbox:
 
+*"VirtualBox is a powerful x86 and AMD64/Intel64 virtualization product for enterprise as well as home use. Not only is VirtualBox an extremely feature rich, high performance product for enterprise customers, it is also the only professional solution that is freely available as Open Source Software under the terms of the GNU General Public License (GPL) version 2"* ([www.virtualbox.org](www.virtualbox.org "VirtualBox Website"))
+
     sudo apt-get install virtualbox
+
+See also: [https://www.virtualbox.org/](https://www.virtualbox.org/ "https://www.virtualbox.org/")
 
 #### 2) Install Vagrant:
 
+*"Vagrant provides easy to configure, reproducible, and portable work environments built on top of industry-standard technology and controlled by a single consistent workflow to help maximize the productivity and flexibility of you and your team."* ([Vagrant Docs](https://docs.vagrantup.com/v2/why-vagrant/index.html "Vagrant Documentation"))
+
     sudo apt-get install vagrant
 
+See also: [https://www.vagrantup.com/](https://www.vagrantup.com/ "https://www.vagrantup.com/")
+
 #### 3) Install GuestAdditions:
+
+*"Guest Additions consist of device drivers and system applications that optimize the guest operating system for better performance and usability."* ([VirtualBox Guest Additions Section](https://www.virtualbox.org/manual/ch04.html#idp94198720 "VirtualBox Guest Additions Section"))
+
+*"vagrant-vbguest is a Vagrant plugin which automatically installs the host's VirtualBox Guest Additions on the guest system."* ([Vagrant Guest Additions on GitHub](https://github.com/dotless-de/vagrant-vbguest "Vagrant Guest Additions"))
 
     vagrant plugin install vagrant-vbguest
 
 #### 4) Add "Ubuntu Trusty/Tahr" box:
 
+"Ubuntu is a Debian-based Linux operating system, with Unity as its default desktop environment." ([Wikipedia](http://en.wikipedia.org/wiki/Ubuntu_%28operating_system%29 "Ubunut at Wikipedia"))
+
 This will take a while depending on your internet connection.
 
     vagrant box add ubuntu/trusty64 https://atlas.hashicorp.com/ubuntu/boxes/trusty64/versions/20150427.0.0/providers/virtualbox.box
 
-#### References: 
+See also:
 
-1. http://www.olindata.com/blog/2014/07/installing-vagrant-and-virtual-box-ubuntu-1404-lts
-2. https://github.com/dotless-de/vagrant-vbguest
-
+1. http://www.ubuntu.com/desktop
+2. http://www.olindata.com/blog/2014/07/installing-vagrant-and-virtual-box-ubuntu-1404-lts
 
 # **Download** project files
 
@@ -71,7 +79,7 @@ If not, download the ZIP file and unzip it.
 
 # **Creating** the VM
 
-Assuming you performed the previous steps perfectly, just go to "vagrant-jenkins" directory an type:
+Assuming you performed the previous steps perfectly, just go to "vagrant-jenkins" directory and type:
 
     vagrant up
     
@@ -87,11 +95,28 @@ This will take a while. Be sure you have a good internet connection. If you wann
 6. Install Jenkins (new sources and apt-get);
 7. Install Jenkins plugins (wget).
 
-## Access your Jenkins server
+# **The Jenkins** server
+
+*"Jenkins is an award-winning application that monitors executions of repeated jobs, such as building a software project or jobss run by cron."* ([Meet Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Meet+Jenkins "Jenkins Docs")) 
 
 After provisioning is done, Jenkins server should be up and running. Open your favorite browser and type the URL:
 
     http://locahost:8081
+
+## Adding some security
+
+1. Click on "Manage Jenkins" link (or got to *http://locahost:8081/manage/*)
+2. Click on "Configure Global Security" (or go to *http://locahost:8081/configureSecurity/*)
+3. Check "Enable security";
+4. I usually check "Logged-in users can do anything", but you can also check "Matrix-based security" and give all accesses to your user;
+
+## Creating a new Project
+
+Since I'm working with Java I created a new Maven Project.
+
+"Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information." ([Maven Site](https://maven.apache.org/ "Maven"))
+
+TBD
 
 # **Allowing** Jenkins external visibility
 
@@ -131,3 +156,53 @@ TBD
 + https://developer.github.com/webhooks/testing/
 + https://developer.github.com/webhooks/creating/
 + https://developer.github.com/webhooks/configuring/
+
+# **Thanks to...**
+
+... The development team and supporters of the applications below, without them I could not even start this project at such low cost (I'm $upporting some of them, just to let you know):
++ Git - [http://git-scm.com/](http://git-scm.com/ "http://git-scm.com/")
++ GitHub - [https://github.com/](https://github.com/ "https://github.com/")
++ Google Chrome - [http://www.google.com/chrome/](http://swww.google.com/chrome/ "http://www.google.com/chrome/")
++ Java - ...
++ Jenkins - ...
++ Maven - ...
++ MdCharm - [http://www.mdcharm.com/](http://www.mdcharm.com/ "http://www.mdcharm.com/")
++ Mozilla Firefox - [https://www.mozilla.org/en-US/firefox/new/](https://www.mozilla.org/en-US/firefox/new/ "https://www.mozilla.org/en-US/firefox/new/")
++ Ubuntu Desktop - [http://www.ubuntu.com/desktop](http://www.ubuntu.com/desktop "http://www.ubuntu.com/desktop")
++ Oracle VirtualBox - ...
++ Vagrant - ...
+
++ All Jenkins plugins people...
+
+I could thank to [Intellij IDEA](https://www.jetbrains.com/idea/ "Intellij IDEA") team and all the guys in JetBrains, but since I'm paying for their software, I won't.
+
+# By the way...
+
+If you find any broken link, English mistakes (there must be tons) or any type of fix you think its worth of noticing... Please, **contact me**! My contact info can be found in my **GitHub** profile. Thanks!
+
+[ [https://github.com/alejoceballos](https://github.com/alejoceballos "https://github.com/alejoceballos") ]
+
+# **License**
+```
+The MIT License (MIT)
+
+Copyright (c) 2015 Alejo Ceballos
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
