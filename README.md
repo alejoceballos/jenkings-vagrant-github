@@ -126,9 +126,13 @@ When events are triggered in Github, it must contact our Jenkins server with a m
 
 *"ngrok allows you to expose a web server running on your local machine to the internet."* ([Getting started with NGROK](https://ngrok.com/docs#expose "NGROK"))
 
+Install ngrok in your HOST machine, not guest. Remember that port 8080 in guest is already being forwarded to 8081 in host by Vagrant script.    
+
     sudo apt-get install ngrok-client
     
 #### 2) Running NGROK
+
+In host, run:
 
     ngrok 8081    
 
