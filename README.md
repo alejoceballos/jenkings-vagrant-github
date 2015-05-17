@@ -1,4 +1,4 @@
-﻿﻿# **Jenkings (Ubuntu Vagrant) + Github Hook**
+﻿# **Jenkings (Ubuntu Vagrant) + Github Hook**
 Formerly know as **JENKINS@localhost with HOOK@github**
 
 This project goal is to be used as a tutorial that offers all the necessary infrastructure to start using Jenkins. 
@@ -123,6 +123,8 @@ TBD
 When events are triggered in Github, it must contact our Jenkins server with a message indicating which event has been triggered. 
 
 #### 1) Installing NGROK
+
+*"ngrok allows you to expose a web server running on your local machine to the internet."* ([Getting started with NGROK](https://ngrok.com/docs#expose "NGROK"))
 
     sudo apt-get install ngrok-client
     
