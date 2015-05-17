@@ -132,9 +132,26 @@ When events are triggered in Github, it must contact our Jenkins server with a m
 
     ngrok 8081    
 
+#### 3) Testing NGROK
+
+After executing the command above, something similar to the output below must be shown in your terminal:
+
+    ngrok                                           (Ctrl+C to quit)
+                                                                                                           
+    Tunnel Status       online                                                                       
+    Version             1.6/1.7                                                                      
+    Forwarding          http://somehexadecimal.ngrok.com -> 127.0.0.1:8081                                  
+    Forwarding          https://somehexadecimal.ngrok.com -> 127.0.0.1:8081                                 
+    Web Interface       127.0.0.1:4040                                                               
+    # Conn              0                                                                            
+    Avg Conn Time       0.00ms                                                                       
+
+Copy the exact forwarded URL that is shown in your terminal and paste it to your browser. You should see the same Jenkins main page as in "http://localhost:8081".
+
 # **Setting** Github's Event Webhook
 
 TBD 
+
 
 #### Useful links:
 
