@@ -60,6 +60,22 @@ chown jenkins:jenkins /var/lib/jenkins/plugins/github-api.hpi
 wget -O /var/lib/jenkins/plugins/github.hpi "http://updates.jenkins-ci.org/latest/github.hpi"
 chown jenkins:jenkins /var/lib/jenkins/plugins/github.hpi
 
+# ##############################################################################
+# Download and install pipeline plugin & dependencies
+# ##############################################################################
+
+wget -O /var/lib/jenkins/plugins/jquery.hpi "http://updates.jenkins-ci.org/latest/jquery.hpi"
+chown jenkins:jenkins /var/lib/jenkins/plugins/jquery.hpi
+
+wget -O /var/lib/jenkins/plugins/dashboard-view.hpi "http://updates.jenkins-ci.org/latest/dashboard-view.hpi"
+chown jenkins:jenkins /var/lib/jenkins/plugins/dashboard-view.hpi
+
+wget -O /var/lib/jenkins/plugins/parameterized-trigger.hpi "http://updates.jenkins-ci.org/latest/parameterized-trigger.hpi"
+chown jenkins:jenkins /var/lib/jenkins/plugins/parameterized-trigger.hpi
+
+wget -O /var/lib/jenkins/plugins/build-pipeline-plugin.hpi "http://updates.jenkins-ci.org/latest/build-pipeline-plugin.hpi"
+chown jenkins:jenkins /var/lib/jenkins/plugins/build-pipeline-plugin.hpi
+
 # Restart jenkins
 /etc/init.d/jenkins restart
 
@@ -74,7 +90,7 @@ chown jenkins:jenkins /var/lib/jenkins/plugins/github.hpi
 # Add Credentials
 #   Kind: Username with password
 #   Scope: Global (...)
-#   Username: alejceballos
+#   Username: alejoceballos
 #   Password: ************
 # Branch Specifier (blank for 'any'): */master
 # Repository browser: AUto
