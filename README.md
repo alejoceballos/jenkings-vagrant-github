@@ -77,7 +77,7 @@ If you have git, wonderful! Just clone this project!
     
 If not, download the ZIP file and unzip it.
 
-# **Creating** the VM
+# **Create** the VM
 
 Assuming you performed the previous steps perfectly, just go to "vagrant-jenkins" directory and type:
 
@@ -87,13 +87,39 @@ This will take a while. Be sure you have a good internet connection. If you wann
 
 ## What does provisioning scripts do?
 
-1. Starts an Ubuntu 14.04 VM with 1 CPU and 512 RAM memory;
-2. Forwards port 8080 in guest machine to 8081 in host machine; 
-3. Installs Git (apt-get);
-4. Installs Java 7 (new PPA and apt-get);
-5. Installs Maven (apt-get);
-6. Install Jenkins (new sources and apt-get);
-7. Install Jenkins plugins (wget).
+1. **Starts an Ubuntu 14.04 VM with 1 CPU and 1024 MB RAM memory;**
+    
+    *Working multiple builds and plugins such as "pipeline" showed me that 512 MB wasn't enough.*
+    
+2. **Forwards port 8080 in guest machine to 8081 in host machine;**
+
+    *If your port 8081 is already being used, you must edit Vagrantfile to choose another port.*
+
+3. **Installs and updates base Ubuntu packages;**
+
+    *For some packages to be installed the english language pack and some other "essential" libraries must be installed/updated.*
+
+4. **Installs Git (apt-get);**
+
+    *To hook Jenkins and GitHub I'll need Git.*
+
+5. **Installs Open JDK and Jenkins (new sources and apt-get);**
+
+    *That's main the point of all of this... Install Jenkins! For that needed to add "jenkins.list" to the "sources.list" (like adding a new PPA). Open JDK 7 is part of the installation, so no need to separately install Java.*
+
+
+7. **Installs Maven (apt-get);**
+
+    *I'm working with Maven and Java projects. Java and Maven are a MUST to me. At the ime of this writing, the default Maven version for Ubuntu was 3.0.5.*
+
+
+## Jenkins Plugins
+
+Along Jenkins installation, a set of plugins for Mavane/GitHub integration are downloaded and installed:
+
+1. Git plugin & dependencies;
+2. GitHub plugin & dependencies;
+3. Pipeline plugin & dependencies.
 
 # **The Jenkins** server
 
@@ -103,22 +129,32 @@ After provisioning is done, Jenkins server should be up and running. Open your f
 
     http://locahost:8081
 
+![Jenkins Welcome](README.files/jenkins-welcome.png "Jenkins Welcome")
+
 ## Adding some security
 
-1. Click on "Manage Jenkins" link (or got to *http://locahost:8081/manage/*)
-2. Click on "Configure Global Security" (or go to *http://locahost:8081/configureSecurity/*)
-3. Check "Enable security";
-4. I usually check "Logged-in users can do anything", but you can also check "Matrix-based security" and give all accesses to your user;
+In the next steps you will be able to allow external visibility to your Jenkins management site. **Yes**, it will be visible to anyone in the internet, so I suggest you add some security to your Jenkins server.
 
-## Creating a new Project
-
-Since I'm working with Java I created a new Maven Project.
-
-"Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information." ([Maven Site](https://maven.apache.org/ "Maven"))
+### Creating a valid User
 
 TBD
 
-# **Allowing** Jenkins external visibility
+### Managing user security
+
+1. Click on "Manage Jenkins" link (or got to *http://locahost:8081/manage/*)
+
+    ![Manage Jenkins](README.files/jenkins-manage.png "Manage Jenkins")
+
+2. Click on "Configure Global Security" (or go to *http://locahost:8081/configureSecurity/*)
+
+    ![Jenkins Security](README.files/jenkins-security.png "Jenkins Security")
+
+3. Check "Enable security";
+
+4. I usually check "Logged-in users can do anything", but you can set more sophisticated security options;
+
+
+# **Allow** Jenkins external visibility
 
 When events are triggered in Github, it must contact our Jenkins server with a message indicating which event has been triggered. 
 
@@ -150,7 +186,15 @@ After executing the command above, something similar to the output below must be
 
 #### 3) Testing NGROK
 
-Copy the exact forwarded URL that is shown in your terminal and paste it to your browser. You should see the same Jenkins main page as in "http://localhost:8081".
+Copy the exact forwarded URL that is shown in your terminal (i.e. "*somehexadecimal.ngrok.com*") and paste it to your browser. You should see the same Jenkins main page as in "*http://localhost:8081*".
+
+## Creating a new Project
+
+Since I'm working with Java I created a new Maven Project.
+
+"Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information." ([Maven Site](https://maven.apache.org/ "Maven"))
+
+TBD
 
 # **Setting** Github's Event Webhook
 
@@ -179,6 +223,8 @@ TBD
 + https://developer.github.com/webhooks/testing/
 + https://developer.github.com/webhooks/creating/
 + https://developer.github.com/webhooks/configuring/
+
++ http://zeroturnaround.com/rebellabs/how-to-use-jenkins-for-job-chaining-and-visualizations/#outoftheboxs
 
 # **Thanks to...**
 

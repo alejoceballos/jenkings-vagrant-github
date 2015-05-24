@@ -8,7 +8,35 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "ubuntu/trusty64"
 
-  ## ###########################################################################  
+  ## ###########################################################################
+  ## VM HARDWARE SETTINGS
+  ## ###########################################################################
+
+  config.vm.provider "virtualbox" do |v|
+    v.name = "jenkins"
+    v.memory = 1024
+    v.cpus = 1
+    v.gui = false
+  end
+
+  ## ###########################################################################
+  ## PORT FORWARDING
+  ## ###########################################################################
+
+  ## Jenkins forwarding
+  config.vm.network :forwarded_port, host: 8081, guest: 8080
+
+  ## ###########################################################################
+  ## SYNCED (SHARED) FOLDERS
+  ## ###########################################################################
+
+  # Normal Shared folder
+  # config.vm.synced_folder ".", "/vagrant", disabled: false
+
+  # Home folder
+  config.vm.synced_folder "../shared/home/vagrant", "/home/vagrant", create: true, owner: "vagrant", group: "vagrant", mount_options: ["dmode=777", "fmode=777"]
+
+  ## ###########################################################################
   ## PROVISIONING
   ## ###########################################################################  
 
@@ -18,31 +46,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ## Git
   config.vm.provision :shell, :path => "bootstrap-git.sh"
   
-  ## Java (7 or 8, check script)
-  config.vm.provision :shell, :path => "bootstrap-java.sh"
-  
+  ## Open JDK 7 + Jenkins
+  config.vm.provision :shell, :path => "bootstrap-jenkins.sh"
+
   ## Maven
   config.vm.provision :shell, :path => "bootstrap-maven.sh"
-  
-  ## Jenkins
-  config.vm.provision :shell, :path => "bootstrap-jenkins.sh"
-  
-  ## ###########################################################################  
-  ## PORT FORWARDING
-  ## ###########################################################################  
 
-  ## Jenkins forwarding
-  config.vm.network :forwarded_port, host: 8081, guest: 8080
-  
-  ## ###########################################################################  
-  ## VM HARDWARE SETTINGS
-  ## ###########################################################################  
-
-  config.vm.provider "virtualbox" do |v|
-    v.name = "jenkins"
-    v.memory = 512
-    v.cpus = 1
-    v.gui = false
-  end
 end
 
